@@ -64,11 +64,11 @@ Admin-only operations and dashboard endpoints
 
 ## Screenshots
 
-![S1](MEDIA/Streamhub_1.png)
-![S2](MEDIA/Streamhub_2.png)
-![S3](MEDIA/Streamhub_3.png)
-![S4](MEDIA/Streamhub_4.png)
-![S5](MEDIA/Streamhub_5.png)
+![S1](media/Streamhub_1.png)
+![S2](media/Streamhub_2.png)
+![S3](media/Streamhub_3.png)
+![S4](media/Streamhub_4.png)
+![S5](media/Streamhub_5.png)
 
 
 ## Highlights
