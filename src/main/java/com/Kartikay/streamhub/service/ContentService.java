@@ -1,10 +1,15 @@
+
 package com.kartikay.streamhub.service;
 
 import com.kartikay.streamhub.dto.ContentRequest;
 import com.kartikay.streamhub.entity.Content;
 import com.kartikay.streamhub.exception.ResourceNotFoundException;
 import com.kartikay.streamhub.repository.ContentRepository;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,16 +28,25 @@ public class ContentService {
                 .releaseYear(request.getReleaseYear())
                 .rating(request.getRating())
                 .build();
+
         return contentRepository.save(content);
     }
 
+    // Existing method retained for backward compatibility
     public List<Content> getAll() {
         return contentRepository.findAll();
     }
 
+    // NEW: Paginated content retrieval with sorting support
+    public Page<Content> getAll(Pageable pageable) {
+        return contentRepository.findAll(pageable);
+    }
+
     public Content getById(Long id) {
         return contentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Content not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Content not found")
+                );
     }
 
     public List<Content> searchByTitle(String keyword) {
@@ -45,11 +59,13 @@ public class ContentService {
 
     public Content update(Long id, ContentRequest request) {
         Content content = getById(id);
+
         content.setTitle(request.getTitle());
         content.setGenre(request.getGenre());
         content.setDescription(request.getDescription());
         content.setReleaseYear(request.getReleaseYear());
         content.setRating(request.getRating());
+
         return contentRepository.save(content);
     }
 
